@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   internal.h                                         :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/05 19:14:25 by jaguillo          #+#    #+#             */
-/*   Updated: 2016/11/05 19:53:51 by jaguillo         ###   ########.fr       */
+/*   Created: 2016/11/05 20:03:06 by jaguillo          #+#    #+#             */
+/*   Updated: 2016/11/05 20:04:57 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERNAL_H
-# define INTERNAL_H
+#include "tetri_map.h"
+#include "tetriminos.h"
 
-# include "tetri_map.h"
-
-/*
-** ========================================================================== **
-*/
-
-extern uint16_t const	g_block_masks[4][5][5];
-
-#endif
+int				main(void)
+{
+	return (0);
+}

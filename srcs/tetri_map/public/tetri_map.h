@@ -6,7 +6,7 @@
 /*   By: ccompera <ccompera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 13:54:14 by ccompera          #+#    #+#             */
-/*   Updated: 2016/11/05 19:14:47 by jaguillo         ###   ########.fr       */
+/*   Updated: 2016/11/05 20:01:47 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ struct	s_tetri_map
 {
 	uint32_t		side_size;
 	uint32_t		side_blocks;
+	uint16_t		map[0];
 };
 
-# define TETRI_MAP_BLOCK(M, X, Y)		(((uint16_t const*)ENDOF(M))[(Y) * (M)->side_blocks + (X)])
+# define TETRI_MAP_BLOCK(M, X, Y)		((M)->map[(Y) * (M)->side_blocks + (X)])
 
 /*
 ** Create a square tetri_map with side 'size'

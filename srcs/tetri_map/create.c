@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tetri_map_create.c                                 :+:      :+:    :+:   */
+/*   create.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 19:01:54 by jaguillo          #+#    #+#             */
-/*   Updated: 2016/11/05 19:15:06 by jaguillo         ###   ########.fr       */
+/*   Updated: 2016/11/05 19:56:00 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 
 static void		enclose_map(t_tetri_map *map)
 {
-	uint32_t const		block_offset = (map->side_size + 1) / 4;
-	uint32_t const		bit_offset = (map->side_size + 1) % 4;
+	uint32_t const		stride = (map->side_size + 1) / 4;
+	uint32_t const		offset = (map->side_size + 1) % 4;
 	uint32_t			i;
 
 	i = 0;
 	while (i < map->side_blocks)
 	{
-		TETRI_MAP_BLOCK(map, block_offset, i) |= 0b1000100010001000 << bit_offset;
-		TETRI_MAP_BLOCK(map, i, block_offset) |= 0b1111000000000000 << (bit_offset * TETRI_WIDTH);
+		TETRI_MAP_BLOCK(map, stride, i) |= 0b1000100010001000 << offset;
+		TETRI_MAP_BLOCK(map, i, stride) |= 0b1111000000000000 << (offset * 4);
 		i++;
 	}
 }
