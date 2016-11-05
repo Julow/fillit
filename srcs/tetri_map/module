@@ -1,0 +1,5 @@
+module tetri_map:
+	public include public/
+	private include ./
+
+	public require ft::base

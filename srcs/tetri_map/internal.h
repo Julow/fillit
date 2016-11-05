@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tetriminos.h                                       :+:      :+:    :+:   */
+/*   internal.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccompera <ccompera@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/04 13:20:04 by ccompera          #+#    #+#             */
-/*   Updated: 2016/11/04 13:50:06 by ccompera         ###   ########.fr       */
+/*   Created: 2016/11/05 19:14:25 by jaguillo          #+#    #+#             */
+/*   Updated: 2016/11/05 19:14:51 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TETRIMINOS_H
-# define TETRIMINOS_H
+#ifndef INTERNAL_H
+# define INTERNAL_H
 
-typedef struct s_tetri		t_tetri;
+# include "tetri_map.h"
 
 /*
 ** ========================================================================== **
-** Tetri
 */
 
-struct	s_tetri
-{
-	uint16_t	bits;
-	uint16_t	id;
-};
+extern uint16_t const	g_block_masks[][][];
 
 #endif
