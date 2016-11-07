@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tetriminos.h                                       :+:      :+:    :+:   */
+/*   internal.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccompera <ccompera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/04 13:20:04 by ccompera          #+#    #+#             */
-/*   Updated: 2016/11/07 19:34:27 by ccompera         ###   ########.fr       */
+/*   Created: 2016/11/07 19:30:54 by ccompera          #+#    #+#             */
+/*   Updated: 2016/11/07 19:39:13 by ccompera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TETRIMINOS_H
-# define TETRIMINOS_H
+#ifndef INTERNAL_H
+# define INTERNAL_H
 
-# include "ft/libft.h"
-
-typedef struct s_tetri		t_tetri;
+# include "tetri_parser.h"
 
 /*
 ** ========================================================================== **
-** Tetri
 */
 
-# define TETRI_H_LINE		0b1111
-# define TETRI_V_LINE		0b0001000100010001
+# define TETRI_CHAR_EMPTY		'.'
+# define TETRI_CHAR_FULL		'#'
 
-struct	s_tetri
-{
-	uint16_t	bits;
-	uint16_t	id;
-};
+/*
+** Check:
+** 	4 bits
+** 	every bit have at least 1 neighbor
+*/
+bool			tetri_check(uint16_t bits);
+
+/*
+** Align a tetri at the top/left
+*/
+uint16_t		tetri_align(uint16_t bits);
 
 #endif

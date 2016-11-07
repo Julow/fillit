@@ -1,3 +1,7 @@
 main module fillit:
+	require ft::file_in
+	require ft::in
+	require ft::printf
 	require tetri_map
+	require tetri_parser
 	require tetriminos
