@@ -4,4 +4,5 @@ main module fillit:
 	require ft::printf
 	require tetri_map
 	require tetri_parser
+	require tetri_solver
 	require tetriminos

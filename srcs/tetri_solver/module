@@ -1,0 +1,7 @@
+module tetri_solver:
+	public include public/
+	private include ./
+
+	public require ft::base
+	public require tetri_map
+	public require tetriminos

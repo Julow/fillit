@@ -60,7 +60,7 @@ PUBLIC_LINKS += $(O_DIR)/_public/ft/file.h $(O_DIR)/_public/ft/file_in.h \
 	$(O_DIR)/_public/ft/ft_vector.h $(O_DIR)/_public/ft/ft_vprintf.h \
 	$(O_DIR)/_public/ft/ft_wchar.h $(O_DIR)/_public/ft/libft.h \
 	$(O_DIR)/_public/tetri_map.h $(O_DIR)/_public/tetri_parser.h \
-	$(O_DIR)/_public/tetriminos.h
+	$(O_DIR)/_public/tetri_solver.h $(O_DIR)/_public/tetriminos.h
 
 # module fillit
 $(O_DIR)/srcs/main/main.o: srcs/main/main.c libft/ft_base/public/libft.h \
@@ -68,7 +68,7 @@ $(O_DIR)/srcs/main/main.o: srcs/main/main.c libft/ft_base/public/libft.h \
 	libft/ft_in/public/ft_in.h libft/ft_out/public/ft_out.h \
 	libft/ft_printf/public/ft_printf.h libft/ft_vector/public/ft_vector.h \
 	srcs/tetri_map/public/tetri_map.h srcs/tetri_parser/public/tetri_parser.h \
-	srcs/tetriminos/tetriminos.h
+	srcs/tetri_solver/public/tetri_solver.h srcs/tetriminos/tetriminos.h
 
 # module ft::base
 $(O_DIR)/libft/ft_base/ft_abs.o: libft/ft_base/ft_abs.c \
@@ -356,6 +356,8 @@ $(O_DIR)/srcs/tetri_parser/parser.o: srcs/tetri_parser/parser.c \
 $(O_DIR)/srcs/tetri_parser/check.o $(O_DIR)/srcs/tetri_parser/parser.o: \
 	INCLUDE_FLAGS += -Isrcs/tetri_parser
 
+# module tetri_solver
+
 # module tetriminos
 
 fillit: $(O_FILES)
@@ -375,4 +377,5 @@ $(O_DIR)/_public/ft/ft_wchar.h: libft/ft_base/public/ft_wchar.h
 $(O_DIR)/_public/ft/libft.h: libft/ft_base/public/libft.h
 $(O_DIR)/_public/tetri_map.h: srcs/tetri_map/public/tetri_map.h
 $(O_DIR)/_public/tetri_parser.h: srcs/tetri_parser/public/tetri_parser.h
+$(O_DIR)/_public/tetri_solver.h: srcs/tetri_solver/public/tetri_solver.h
 $(O_DIR)/_public/tetriminos.h: srcs/tetriminos/tetriminos.h
