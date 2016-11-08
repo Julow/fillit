@@ -6,7 +6,7 @@
 /*   By: ccompera <ccompera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 13:54:14 by ccompera          #+#    #+#             */
-/*   Updated: 2016/11/05 20:01:47 by jaguillo         ###   ########.fr       */
+/*   Updated: 2016/11/08 18:06:42 by ccompera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,29 +39,30 @@ struct	s_tetri_map
 
 /*
 ** Create a square tetri_map with side 'size'
+** Overflow area is guarded by an active bit (1) (to the right and bottom)
 ** -
 ** Params:
 ** 	'size'		Side size (in bit)
+** Return:
+**  A dynamically allocated tetri_map
+**  (can be free with 'free')
 */
 t_tetri_map		*tetri_map_create(uint32_t size);
 
 /*
-** Insert the block 'bits' at pos
+** Toggle the block 'bits' at pos
 ** -
 ** Params:
 ** 	'pos'		Position (in bit) in 'map'
 */
-void			tetri_map_insert(t_tetri_map *map, uint16_t bits, t_vec2u pos);
+void			tetri_map_toggle(t_tetri_map *map, uint16_t bits, t_vec2u pos);
 
 /*
-** Return the result of the bitwise AND between 'bits' and the bits at 'pos'
-** Overflow area is guarded by an active bit (1) (to the right and bottom)
+** Return the a 4*4 sample of the map at 'pos'
 ** -
 ** Params:
-** 	'bits'		Mask
-** 	'pos'		Position (in bit) in 'map'
+** 	'pos'		Position (in bit)
 */
-uint16_t		tetri_map_collide(t_tetri_map const *map, uint16_t bits,
-					t_vec2u pos);
+uint16_t		tetri_map_get(t_tetri_map const *map, t_vec2u pos);
 
 #endif
