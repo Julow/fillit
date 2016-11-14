@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 20:03:06 by jaguillo          #+#    #+#             */
-/*   Updated: 2016/11/11 20:03:13 by jaguillo         ###   ########.fr       */
+/*   Updated: 2016/11/14 15:50:31 by ccompera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,19 @@ static void		print_solution(t_tetri_solution const *sol)
 	ft_printf("%!");
 }
 
-int				main(void)
+int				main(int argc, char **argv)
 {
-	t_file_in *const	in = ft_in_fdopen(0);
+	t_file_in			*in;
 	t_vector			tetris;
 	t_tetri_solution	*solution;
 
+	if (argc != 2 || (in = ft_in_open(ft_sub(argv[1], 0, -1))) == NULL)
+	{
+		ft_dprintf(2, "error%n");
+		return (1);
+	}
 	tetris = VECTOR(t_tetri);
-	if (!parse_tetris(in, &tetris))
+	if (!parse_tetris(V(in), &tetris))
 	{
 		ft_dprintf(2, "error%n");
 		ft_vclear(&tetris);

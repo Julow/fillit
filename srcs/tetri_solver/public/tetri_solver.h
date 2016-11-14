@@ -6,7 +6,7 @@
 /*   By: ccompera <ccompera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 22:26:11 by ccompera          #+#    #+#             */
-/*   Updated: 2016/11/11 19:57:17 by jaguillo         ###   ########.fr       */
+/*   Updated: 2016/11/14 14:27:36 by ccompera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "ft/ft_vector.h"
 # include "ft/libft.h"
 
-# include "tetri_map.h"
 # include "tetriminos.h"
 
 typedef struct s_tetri_pos			t_tetri_pos;

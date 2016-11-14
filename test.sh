@@ -7,7 +7,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/10 18:50:13 by jaguillo          #+#    #+#              #
-#    Updated: 2016/11/11 20:17:24 by jaguillo         ###   ########.fr        #
+#    Updated: 2016/11/14 14:39:09 by ccompera         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ PIECES = [
 	".#..\n##..\n.#..\n...."
 ]
 
-print("\n\n".join(random.sample(PIECES, $N)))
+print("\n\n".join([random.choice(PIECES) for _ in range($N)]))
 
 EOF
 	then
