@@ -6,18 +6,18 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 14:33:00 by jaguillo          #+#    #+#             */
-/*   Updated: 2016/11/18 13:51:12 by ccompera         ###   ########.fr       */
+/*   Updated: 2016/11/18 15:38:03 by ccompera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internal.h"
 #include "tetri_map.h"
 
-uint16_t		tetri_map_get(t_tetri_map const *map, t_vec2u pos)
+uint16_t		tetri_map_get(t_tetri_map const *map, uint32_t x, uint32_t y)
 {
 	uint64_t const	bits = BLOCK_NORM(
-			TETRI_MAP_BLOCK(map, pos.x >> 2, pos.y >> 2),
-			pos.x & 0b11, pos.y & 0b11);
+			TETRI_MAP_BLOCK(map, x >> 2, y >> 2),
+			x & 0b11, y & 0b11);
 
 	return (0
 		| (uint16_t)((bits & (0b1111 <<  0)) >>  0)

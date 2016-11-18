@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 19:45:58 by jaguillo          #+#    #+#             */
-/*   Updated: 2016/11/14 15:24:40 by ccompera         ###   ########.fr       */
+/*   Updated: 2016/11/18 19:59:15 by ccompera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,29 @@
 static bool		place_tetri(t_vec2u *pos, t_tetri_map const *map,
 					t_tetri const *tetri)
 {
-	while (pos->y < map->side_size)
+	t_vec2u const	clip = VEC2U(map->side_size - tetri->clip.x,
+						map->side_size - tetri->clip.y);
+	uint32_t		x;
+	uint32_t		y;
+	uint64_t const	tetri_bits = tetri_16to64(tetri->bits);
+	uint64_t		bits;
+
+	x = pos->x;
+	y = pos->y;
+	while (y <= clip.y)
 	{
-		while (pos->x < map->side_size)
+		while (x <= clip.x)
 		{
-			if ((tetri_map_get(map, *pos) & tetri->bits) == 0)
+			bits = TETRI_MAP_BLOCK(map, x >> 2, y >> 2) >> ((y & 0b11) * 8 + (x & 0b11));
+			if ((bits & tetri_bits) == 0)
+			{
+				*pos = VEC2U(x, y);
 				return (true);
-			pos->x++;
+			}
+			++x;
 		}
-		pos->x = 0;
-		pos->y++;
+		x = 0;
+		++y;
 	}
 	return (false);
 }
@@ -61,6 +74,7 @@ static bool		tetri_backtrack(t_tetri_pool *pool, t_tetri_map *map,
 				pool[i].pos = VEC2U(0, 0);
 			}
 			pool[i].used = false;
+			return (false);
 		}
 		i++;
 	}

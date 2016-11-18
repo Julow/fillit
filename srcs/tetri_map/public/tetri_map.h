@@ -6,7 +6,7 @@
 /*   By: ccompera <ccompera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 13:54:14 by ccompera          #+#    #+#             */
-/*   Updated: 2016/11/16 17:42:00 by ccompera         ###   ########.fr       */
+/*   Updated: 2016/11/18 19:54:57 by ccompera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ typedef struct s_tetri_map	t_tetri_map;
 
 /*
 ** ========================================================================== **
+** tetri_map
+** -
+** Store bits in a square of 'side_size'
+** Is composed of 8*8 blocks overlapping each other with a step of 4
+** Example: A stores its neighbors like this: 
+** 		A B
+** 		C D
 */
 
 /*
@@ -63,6 +70,11 @@ void			tetri_map_toggle(t_tetri_map *map, uint16_t bits, t_vec2u pos);
 ** Params:
 ** 	'pos'		Position (in bit)
 */
-uint16_t		tetri_map_get(t_tetri_map const *map, t_vec2u pos);
+uint16_t		tetri_map_get(t_tetri_map const *map, uint32_t x, uint32_t y);
+
+/*
+** Tranform a 4*4 bits to a 8*8 bits.
+*/
+uint64_t		tetri_16to64(uint16_t bits);
 
 #endif
