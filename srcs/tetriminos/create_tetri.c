@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tetriminos.h                                       :+:      :+:    :+:   */
+/*   create_tetri.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccompera <ccompera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/04 13:20:04 by ccompera          #+#    #+#             */
-/*   Updated: 2016/11/18 14:46:32 by ccompera         ###   ########.fr       */
+/*   Created: 2016/11/18 14:29:10 by ccompera          #+#    #+#             */
+/*   Updated: 2016/11/18 15:11:11 by ccompera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TETRIMINOS_H
-# define TETRIMINOS_H
+#include "tetriminos.h"
 
-# include "ft/libft.h"
-
-typedef struct s_tetri		t_tetri;
-
-/*
-** ========================================================================== **
-** Tetri
-*/
-
-# define TETRI_H_LINE		0b1111
-# define TETRI_V_LINE		0b0001000100010001
-
-struct	s_tetri
+static t_vec2u	get_clip(uint16_t bits)
 {
-	uint16_t		bits;
 	t_vec2u			clip;
-};
 
-void			create_tetri(uint16_t bits, t_tetri *dst);
+	clip = VEC2U(0, 0);
+	while (bits & (TETRI_H_LINE << (clip.y * 4)))
+		clip.y++;
+	while (bits & (TETRI_V_LINE << clip.x))
+		clip.x++;
+	return (clip);
+}
 
-#endif
+void			create_tetri(uint16_t bits, t_tetri *dst)
+{
+	*dst = (t_tetri){bits, get_clip(bits)};
+}

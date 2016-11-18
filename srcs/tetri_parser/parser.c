@@ -6,7 +6,7 @@
 /*   By: ccompera <ccompera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 19:29:49 by ccompera          #+#    #+#             */
-/*   Updated: 2016/11/07 19:49:04 by ccompera         ###   ########.fr       */
+/*   Updated: 2016/11/18 14:46:10 by ccompera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,17 @@ static bool		get_next_tetri(t_in *in, uint16_t *dst)
 
 bool			parse_tetris(t_in *in, t_vector *dst)
 {
-	t_tetri			tetri;
+	uint16_t		bits;
 
-	tetri = (t_tetri){0, 0};
 	while (true)
 	{
-		tetri.bits = 0;
-		if (!get_next_tetri(in, &tetri.bits))
+		bits = 0;
+		if (!get_next_tetri(in, &bits))
 			return (false);
-		tetri.bits = tetri_align(tetri.bits);
-		if (!tetri_check(tetri.bits))
+		bits = tetri_align(bits);
+		if (!tetri_check(bits))
 			return (false);
-		ft_vpush(dst, &tetri, 1);
-		tetri.id++;
+		create_tetri(bits, ft_vpush(dst, NULL, 1));
 		if (!IN_REFRESH(in))
 			break ;
 		if (in->buff[in->buff_i++] != '\n')

@@ -1,8 +1,8 @@
 INCLUDE_FLAGS += -I$(O_DIR)/_public
 MAINS += fillit
-OBJ_DIR_TREE += $(O_DIR)/srcs/tetri_solver/ $(O_DIR)/srcs/tetri_parser/ \
-	$(O_DIR)/srcs/tetri_map/ $(O_DIR)/srcs/main/ $(O_DIR)/srcs/ \
-	$(O_DIR)/libft/ft_vector/ $(O_DIR)/libft/ft_set/ \
+OBJ_DIR_TREE += $(O_DIR)/srcs/tetriminos/ $(O_DIR)/srcs/tetri_solver/ \
+	$(O_DIR)/srcs/tetri_parser/ $(O_DIR)/srcs/tetri_map/ $(O_DIR)/srcs/main/ \
+	$(O_DIR)/srcs/ $(O_DIR)/libft/ft_vector/ $(O_DIR)/libft/ft_set/ \
 	$(O_DIR)/libft/ft_printf/formats/ $(O_DIR)/libft/ft_printf/ \
 	$(O_DIR)/libft/ft_out/ $(O_DIR)/libft/ft_in/ $(O_DIR)/libft/ft_file_in/ \
 	$(O_DIR)/libft/ft_file/ $(O_DIR)/libft/ft_dstr/ $(O_DIR)/libft/ft_base/ \
@@ -56,16 +56,17 @@ O_FILES += $(O_DIR)/srcs/main/main.o $(O_DIR)/libft/ft_base/ft_abs.o \
 	$(O_DIR)/libft/ft_vector/ft_vreserve.o $(O_DIR)/libft/ft_vector/ft_vspan.o \
 	$(O_DIR)/srcs/tetri_map/access.o $(O_DIR)/srcs/tetri_map/create.o \
 	$(O_DIR)/srcs/tetri_map/update.o $(O_DIR)/srcs/tetri_parser/check.o \
-	$(O_DIR)/srcs/tetri_parser/parser.o $(O_DIR)/srcs/tetri_solver/solve.o
-PUBLIC_LINKS += $(O_DIR)/_public/ft/file.h $(O_DIR)/_public/ft/file_in.h \
-	$(O_DIR)/_public/ft/ft_colors.h $(O_DIR)/_public/ft/ft_dstr.h \
-	$(O_DIR)/_public/ft/ft_in.h $(O_DIR)/_public/ft/ft_out.h \
-	$(O_DIR)/_public/ft/ft_printf.h $(O_DIR)/_public/ft/ft_str_out.h \
-	$(O_DIR)/_public/ft/ft_vector.h $(O_DIR)/_public/ft/ft_vprintf.h \
-	$(O_DIR)/_public/ft/ft_wchar.h $(O_DIR)/_public/ft/libft.h \
-	$(O_DIR)/_public/ft/set.h $(O_DIR)/_public/tetri_map.h \
-	$(O_DIR)/_public/tetri_parser.h $(O_DIR)/_public/tetri_solver.h \
-	$(O_DIR)/_public/tetriminos.h
+	$(O_DIR)/srcs/tetri_parser/parser.o $(O_DIR)/srcs/tetri_solver/solve.o \
+	$(O_DIR)/srcs/tetriminos/create_tetri.o
+PUBLIC_LINKS += $(O_DIR)/_public/create_tetri.c $(O_DIR)/_public/ft/file.h \
+	$(O_DIR)/_public/ft/file_in.h $(O_DIR)/_public/ft/ft_colors.h \
+	$(O_DIR)/_public/ft/ft_dstr.h $(O_DIR)/_public/ft/ft_in.h \
+	$(O_DIR)/_public/ft/ft_out.h $(O_DIR)/_public/ft/ft_printf.h \
+	$(O_DIR)/_public/ft/ft_str_out.h $(O_DIR)/_public/ft/ft_vector.h \
+	$(O_DIR)/_public/ft/ft_vprintf.h $(O_DIR)/_public/ft/ft_wchar.h \
+	$(O_DIR)/_public/ft/libft.h $(O_DIR)/_public/ft/set.h \
+	$(O_DIR)/_public/tetri_map.h $(O_DIR)/_public/tetri_parser.h \
+	$(O_DIR)/_public/tetri_solver.h $(O_DIR)/_public/tetriminos.h
 
 # module fillit
 $(O_DIR)/srcs/main/main.o: srcs/main/main.c libft/ft_base/public/libft.h \
@@ -390,10 +391,13 @@ $(O_DIR)/srcs/tetri_solver/solve.o: srcs/tetri_solver/solve.c \
 $(O_DIR)/srcs/tetri_solver/solve.o: INCLUDE_FLAGS += -Isrcs/tetri_solver
 
 # module tetriminos
+$(O_DIR)/srcs/tetriminos/create_tetri.o: srcs/tetriminos/create_tetri.c \
+	libft/ft_base/public/libft.h srcs/tetriminos/tetriminos.h
 
 fillit: $(O_FILES)
 
 # public links
+$(O_DIR)/_public/create_tetri.c: srcs/tetriminos/create_tetri.c
 $(O_DIR)/_public/ft/file.h: libft/ft_file/public/file.h
 $(O_DIR)/_public/ft/file_in.h: libft/ft_file_in/public/file_in.h
 $(O_DIR)/_public/ft/ft_colors.h: libft/ft_base/public/ft_colors.h

@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 20:03:06 by jaguillo          #+#    #+#             */
-/*   Updated: 2016/11/14 15:50:31 by ccompera         ###   ########.fr       */
+/*   Updated: 2016/11/18 14:49:29 by ccompera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ static void		print_solution(t_tetri_solution const *sol)
 	{
 		t = &sol->tetris[i];
 		// ft_printf("TETRI#%d AT %d,%d%n", t->tetri->id, t->pos.x, t->pos.y);
-		put_tetri_line(&tab[t->pos.y + 0][t->pos.x], t->tetri->bits, t->tetri->id + 'A', 0);
-		put_tetri_line(&tab[t->pos.y + 1][t->pos.x], t->tetri->bits, t->tetri->id + 'A', 4);
-		put_tetri_line(&tab[t->pos.y + 2][t->pos.x], t->tetri->bits, t->tetri->id + 'A', 8);
-		put_tetri_line(&tab[t->pos.y + 3][t->pos.x], t->tetri->bits, t->tetri->id + 'A', 12);
+		put_tetri_line(&tab[t->pos.y + 0][t->pos.x], t->tetri->bits, i + 'A', 0);
+		put_tetri_line(&tab[t->pos.y + 1][t->pos.x], t->tetri->bits, i + 'A', 4);
+		put_tetri_line(&tab[t->pos.y + 2][t->pos.x], t->tetri->bits, i + 'A', 8);
+		put_tetri_line(&tab[t->pos.y + 3][t->pos.x], t->tetri->bits, i + 'A', 12);
 		i++;
 	}
 	// ft_printf("Map size: %d\n", sol->map_size);
