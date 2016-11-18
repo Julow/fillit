@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 14:33:00 by jaguillo          #+#    #+#             */
-/*   Updated: 2016/11/08 18:06:46 by ccompera         ###   ########.fr       */
+/*   Updated: 2016/11/18 13:51:12 by ccompera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,13 @@
 
 uint16_t		tetri_map_get(t_tetri_map const *map, t_vec2u pos)
 {
-	t_vec2u const	p = VEC2U(pos.x / 4, pos.y / 4);
-	t_vec2u const	mod = VEC2U(pos.x % 4, pos.y % 4);
+	uint64_t const	bits = BLOCK_NORM(
+			TETRI_MAP_BLOCK(map, pos.x >> 2, pos.y >> 2),
+			pos.x & 0b11, pos.y & 0b11);
 
-	return ((((TETRI_MAP_BLOCK(map, p.x, p.y)
-					& g_block_masks[3][mod.x][mod.y])
-				>> (mod.y * 4)) >> mod.x)
-		| (((TETRI_MAP_BLOCK(map, p.x + 1, p.y)
-					& g_block_masks[2][mod.x][mod.y])
-				>> (mod.y * 4)) << (4 - mod.x))
-		| (((TETRI_MAP_BLOCK(map, p.x, p.y + 1)
-					& g_block_masks[1][mod.x][mod.y])
-				<< ((4 - mod.y) * 4)) >> mod.x)
-		| (((TETRI_MAP_BLOCK(map, p.x + 1, p.y + 1)
-					& g_block_masks[0][mod.x][mod.y])
-				<< ((4 - mod.y) * 4)) << (4 - mod.x)));
+	return (0
+		| (uint16_t)((bits & (0b1111 <<  0)) >>  0)
+		| (uint16_t)((bits & (0b1111 <<  8)) >>  4)
+		| (uint16_t)((bits & (0b1111 << 16)) >>  8)
+		| (uint16_t)((bits & (0b1111 << 24)) >> 12));
 }

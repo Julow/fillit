@@ -6,7 +6,7 @@
 /*   By: ccompera <ccompera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 13:54:14 by ccompera          #+#    #+#             */
-/*   Updated: 2016/11/08 18:06:42 by ccompera         ###   ########.fr       */
+/*   Updated: 2016/11/16 17:42:00 by ccompera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_tetri_map	t_tetri_map;
 /*
 ** side_size		=> side size in bit
 ** side_blocks		=> side size in block (also line stride)
-** map				=> blocks (array of 4*4 bits blocks)
+** map				=> blocks (array of 8*8 bits blocks with a step of 4)
 ** -
 ** TETRI_MAP_BLOCK(MAP+, X, Y)	Return the block at X, Y
 */
@@ -32,7 +32,7 @@ struct	s_tetri_map
 {
 	uint32_t		side_size;
 	uint32_t		side_blocks;
-	uint16_t		map[0];
+	uint64_t		map[0];
 };
 
 # define TETRI_MAP_BLOCK(M, X, Y)		((M)->map[(Y) * (M)->side_blocks + (X)])

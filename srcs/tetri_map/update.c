@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 11:26:51 by jaguillo          #+#    #+#             */
-/*   Updated: 2016/11/08 18:38:26 by ccompera         ###   ########.fr       */
+/*   Updated: 2016/11/18 13:52:27 by ccompera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,29 @@
 
 void			tetri_map_toggle(t_tetri_map *map, uint16_t bits, t_vec2u pos)
 {
-	t_vec2u const	p = VEC2U(pos.x/4, pos.y/4);
-	t_vec2u const	mod = VEC2U(pos.x%4, pos.y%4);
+	uint64_t		bits64;
+	uint64_t		*dst;
+	int32_t const	y = map->side_blocks;
 
-	uint16_t const	a_bits = ((bits & g_block_masks[0][4-mod.x][4-mod.y])
-			<< mod.x) << (mod.y * 4);
-	uint16_t const	b_bits = ((bits & g_block_masks[1][4-mod.x][4-mod.y])
-			>> (4 - mod.x)) << (mod.y * 4);
-	uint16_t const	c_bits = ((bits & g_block_masks[2][4-mod.x][4-mod.y])
-			>> ((4 - mod.y) * 4)) << mod.x;
-	uint16_t const	d_bits = ((bits & g_block_masks[3][4-mod.x][4-mod.y])
-			>> (4 - mod.x)) >> ((4 - mod.y) * 4);
-
-	TETRI_MAP_BLOCK(map, p.x    , p.y    ) ^= a_bits;
-	TETRI_MAP_BLOCK(map, p.x + 1, p.y    ) ^= b_bits;
-	TETRI_MAP_BLOCK(map, p.x    , p.y + 1) ^= c_bits;
-	TETRI_MAP_BLOCK(map, p.x + 1, p.y + 1) ^= d_bits;
+	bits64 = BLOCK_MOVE(((uint64_t)(bits & (0b1111 <<  0))) <<  0
+				| ((uint64_t)(bits & (0b1111 <<  4))) <<  4
+				| ((uint64_t)(bits & (0b1111 <<  8))) <<  8
+				| ((uint64_t)(bits & (0b1111 << 12))) << 12,
+			pos.x & 0b11, pos.y & 0b11);
+	dst = map->map + ((pos.y >> 2) * map->side_blocks) + (pos.x >> 2);
+	if (pos.y >= 4)
+	{
+		if (pos.x >= 4)
+			dst[-y - 1] ^= (bits64 & 0x000000000f0f0f0f) << 36;
+		dst[-y] ^= (bits64 & 0x00000000ffffffff) << 32;
+		dst[-y + 1] ^= (bits64 & 0x00000000f0f0f0f0) << 28;
+	}
+	if (pos.x >= 4)
+		dst[-1] ^= (bits64 & 0x0f0f0f0f0f0f0f0f) << 4;
+	dst[0] ^= bits64;
+	dst[1] ^= (bits64 & 0xf0f0f0f0f0f0f0f0) >> 4;
+	if (pos.x >= 4)
+		dst[y - 1] ^= (bits64 & 0x0f0f0f0f00000000) >> 28;
+	dst[y] ^= (bits64 & 0xffffffff00000000) >> 32;
+	dst[y + 1] ^= (bits64 & 0xf0f0f0f000000000) >> 36;
 }

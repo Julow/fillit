@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 19:14:25 by jaguillo          #+#    #+#             */
-/*   Updated: 2016/11/05 19:53:51 by jaguillo         ###   ########.fr       */
+/*   Updated: 2016/11/18 13:40:31 by ccompera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 ** ========================================================================== **
 */
 
-extern uint16_t const	g_block_masks[4][5][5];
+# define BLOCK_NORM(BITS, X, Y)	((BITS) >> ((Y) * 8 + (X)))
+# define BLOCK_MOVE(BITS, X, Y)	((BITS) << ((Y) * 8 + (X)))
 
 #endif

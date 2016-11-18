@@ -54,10 +54,9 @@ O_FILES += $(O_DIR)/srcs/main/main.o $(O_DIR)/libft/ft_base/ft_abs.o \
 	$(O_DIR)/libft/ft_set/remove.o $(O_DIR)/libft/ft_set/utils.o \
 	$(O_DIR)/libft/ft_vector/ft_vclear.o $(O_DIR)/libft/ft_vector/ft_vpush.o \
 	$(O_DIR)/libft/ft_vector/ft_vreserve.o $(O_DIR)/libft/ft_vector/ft_vspan.o \
-	$(O_DIR)/srcs/tetri_map/access.o $(O_DIR)/srcs/tetri_map/block_masks.o \
-	$(O_DIR)/srcs/tetri_map/create.o $(O_DIR)/srcs/tetri_map/update.o \
-	$(O_DIR)/srcs/tetri_parser/check.o $(O_DIR)/srcs/tetri_parser/parser.o \
-	$(O_DIR)/srcs/tetri_solver/solve.o
+	$(O_DIR)/srcs/tetri_map/access.o $(O_DIR)/srcs/tetri_map/create.o \
+	$(O_DIR)/srcs/tetri_map/update.o $(O_DIR)/srcs/tetri_parser/check.o \
+	$(O_DIR)/srcs/tetri_parser/parser.o $(O_DIR)/srcs/tetri_solver/solve.o
 PUBLIC_LINKS += $(O_DIR)/_public/ft/file.h $(O_DIR)/_public/ft/file_in.h \
 	$(O_DIR)/_public/ft/ft_colors.h $(O_DIR)/_public/ft/ft_dstr.h \
 	$(O_DIR)/_public/ft/ft_in.h $(O_DIR)/_public/ft/ft_out.h \
@@ -356,9 +355,6 @@ $(O_DIR)/libft/ft_vector/ft_vspan.o: libft/ft_vector/ft_vspan.c \
 $(O_DIR)/srcs/tetri_map/access.o: srcs/tetri_map/access.c \
 	libft/ft_base/public/libft.h srcs/tetri_map/internal.h \
 	srcs/tetri_map/public/tetri_map.h
-$(O_DIR)/srcs/tetri_map/block_masks.o: srcs/tetri_map/block_masks.c \
-	libft/ft_base/public/libft.h srcs/tetri_map/internal.h \
-	srcs/tetri_map/public/tetri_map.h
 $(O_DIR)/srcs/tetri_map/create.o: srcs/tetri_map/create.c \
 	libft/ft_base/public/libft.h srcs/tetri_map/internal.h \
 	srcs/tetri_map/public/tetri_map.h
@@ -366,9 +362,8 @@ $(O_DIR)/srcs/tetri_map/update.o: srcs/tetri_map/update.c \
 	libft/ft_base/public/libft.h srcs/tetri_map/internal.h \
 	srcs/tetri_map/public/tetri_map.h
 
-$(O_DIR)/srcs/tetri_map/access.o $(O_DIR)/srcs/tetri_map/block_masks.o \
-$(O_DIR)/srcs/tetri_map/create.o $(O_DIR)/srcs/tetri_map/update.o: \
-	INCLUDE_FLAGS += -Isrcs/tetri_map
+$(O_DIR)/srcs/tetri_map/access.o $(O_DIR)/srcs/tetri_map/create.o \
+$(O_DIR)/srcs/tetri_map/update.o: INCLUDE_FLAGS += -Isrcs/tetri_map
 
 # module tetri_parser
 $(O_DIR)/srcs/tetri_parser/check.o: srcs/tetri_parser/check.c \
