@@ -6,7 +6,7 @@
 /*   By: ccompera <ccompera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 19:29:49 by ccompera          #+#    #+#             */
-/*   Updated: 2016/11/18 14:46:10 by ccompera         ###   ########.fr       */
+/*   Updated: 2016/11/19 16:01:57 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ bool			parse_tetris(t_in *in, t_vector *dst)
 		bits = tetri_align(bits);
 		if (!tetri_check(bits))
 			return (false);
-		create_tetri(bits, ft_vpush(dst, NULL, 1));
+		ft_vpush(dst, &bits, 1);
 		if (!IN_REFRESH(in))
 			break ;
 		if (in->buff[in->buff_i++] != '\n')

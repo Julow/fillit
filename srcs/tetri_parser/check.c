@@ -6,12 +6,15 @@
 /*   By: ccompera <ccompera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 19:30:23 by ccompera          #+#    #+#             */
-/*   Updated: 2016/11/07 19:49:07 by ccompera         ###   ########.fr       */
+/*   Updated: 2016/11/19 15:40:37 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internal.h"
 #include "tetri_parser.h"
+
+#define TETRI_H_LINE		0b1111
+#define TETRI_V_LINE		0b0001000100010001
 
 static uint32_t	bit_count(uint32_t n)
 {

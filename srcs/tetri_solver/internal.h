@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 19:47:27 by jaguillo          #+#    #+#             */
-/*   Updated: 2016/11/19 12:59:48 by jaguillo         ###   ########.fr       */
+/*   Updated: 2016/11/19 16:05:42 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,17 @@ typedef struct s_tetri_shape		t_tetri_shape;
 
 struct		s_tetri_pool
 {
-	t_tetri const	*tetri;
 	uint32_t		required;
+	uint64_t		bits;
 	t_vec2u			pos;
+	t_vec2u			clip;
 };
 
 struct		s_tetri_shape
 {
 	t_set_h			set_h;
 	uint32_t		index;
-	t_tetri	const	*tetri;
+	uint16_t		bits;
 };
 
 #endif

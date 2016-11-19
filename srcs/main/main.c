@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 20:03:06 by jaguillo          #+#    #+#             */
-/*   Updated: 2016/11/19 12:46:47 by jaguillo         ###   ########.fr       */
+/*   Updated: 2016/11/19 16:07:30 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,8 @@
 #include "tetri_map.h"
 #include "tetri_parser.h"
 #include "tetri_solver.h"
-#include "tetriminos.h"
 
 #include <stdlib.h>
-
-static char const	tetri_line[][4] = {
-	[0] = "\0\0\0\0",
-	[1] = "\1\0\0\0",
-	[2] = "\0\1\0\0",
-	[3] = "\1\1\0\0",
-	[4] = "\0\0\1\0",
-	[5] = "\1\0\1\0",
-	[6] = "\0\1\1\0",
-	[7] = "\1\1\1\0",
-	[8] = "\0\0\0\1",
-	[9] = "\1\0\0\1",
-	[10] = "\0\1\0\1",
-	[11] = "\1\1\0\1",
-	[12] = "\0\0\1\1",
-	[13] = "\1\0\1\1",
-	[14] = "\0\1\1\1",
-	[15] = "\1\1\1\1",
-};
 
 static char const	g_colors[][5] = {
 	"\033[36m",
@@ -86,7 +66,7 @@ static void		print_solution(t_tetri_solution const *sol)
 		while (j < 16)
 		{
 			char *dst = tab[t->pos.y + j/4][t->pos.x + j%4];
-			if (t->tetri->bits & (1 << j))
+			if (t->tetri & (1 << j))
 			{
 				ft_memcpy(dst, g_colors[i % ARRAY_LEN(g_colors)], 5);
 				dst[5] = 'A' + i;
@@ -116,7 +96,7 @@ int				main(int argc, char **argv)
 		ft_dprintf(2, "error%n");
 		return (1);
 	}
-	tetris = VECTOR(t_tetri);
+	tetris = VECTOR(uint16_t);
 	if (!parse_tetris(V(in), &tetris))
 	{
 		ft_dprintf(2, "error%n");

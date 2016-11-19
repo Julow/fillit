@@ -1,4 +1,0 @@
-module tetriminos:
-	public include ./
-
-	public require ft::base

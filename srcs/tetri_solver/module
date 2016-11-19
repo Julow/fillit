@@ -4,7 +4,6 @@ module tetri_solver:
 
 	public require ft::base
 	public require ft::vector
-	public require tetriminos
 
 	private require ft::set
 	private require tetri_map

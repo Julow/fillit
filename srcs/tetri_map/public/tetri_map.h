@@ -6,7 +6,7 @@
 /*   By: ccompera <ccompera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 13:54:14 by ccompera          #+#    #+#             */
-/*   Updated: 2016/11/18 19:54:57 by ccompera         ###   ########.fr       */
+/*   Updated: 2016/11/19 15:58:58 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_tetri_map		*tetri_map_create(uint32_t size);
 ** Params:
 ** 	'pos'		Position (in bit) in 'map'
 */
-void			tetri_map_toggle(t_tetri_map *map, uint16_t bits, t_vec2u pos);
+void			tetri_map_toggle(t_tetri_map *map, uint64_t bits, t_vec2u pos);
 
 /*
 ** Return the a 4*4 sample of the map at 'pos'

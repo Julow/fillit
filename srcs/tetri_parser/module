@@ -4,4 +4,3 @@ module tetri_parser:
 
 	public require ft::in
 	public require ft::vector
-	public require tetriminos
