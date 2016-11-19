@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 19:47:27 by jaguillo          #+#    #+#             */
-/*   Updated: 2016/11/14 15:12:12 by ccompera         ###   ########.fr       */
+/*   Updated: 2016/11/19 12:59:48 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ struct		s_tetri_pool
 {
 	t_tetri const	*tetri;
 	uint32_t		required;
-	bool			used;
 	t_vec2u			pos;
 };
 

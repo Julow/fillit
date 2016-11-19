@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 19:45:58 by jaguillo          #+#    #+#             */
-/*   Updated: 2016/11/18 19:59:15 by ccompera         ###   ########.fr       */
+/*   Updated: 2016/11/19 15:18:43 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,39 +46,27 @@ static bool		place_tetri(t_vec2u *pos, t_tetri_map const *map,
 }
 
 static bool		tetri_backtrack(t_tetri_pool *pool, t_tetri_map *map,
-					uint32_t len, uint32_t path_i)
+					uint32_t len)
 {
-	t_tetri const	*tetri; 
 	uint32_t		i;
 
 	i = 0;
-	if (len == path_i)
-		return (true);
-	while (i < len)
-	{
-		if (!pool[i].used)
+	while (true)
+		if (place_tetri(&pool[i].pos, map, pool[i].tetri))
 		{
-			pool[i].used = true;
-			if (pool[pool[i].required].used)
-			{
-				tetri = pool[i].tetri;
-				pool[i].pos = pool[pool[i].required].pos;
-				while (place_tetri(&pool[i].pos, map, tetri))
-				{
-					tetri_map_toggle(map, tetri->bits, pool[i].pos);
-					if (tetri_backtrack(pool, map, len, path_i + 1))
-						return (true);
-					tetri_map_toggle(map, tetri->bits, pool[i].pos);
-					pool[i].pos.x++;
-				}
-				pool[i].pos = VEC2U(0, 0);
-			}
-			pool[i].used = false;
-			return (false);
+			tetri_map_toggle(map, pool[i].tetri->bits, pool[i].pos);
+			if (++i == len)
+				return (true);
+			pool[i].pos = pool[pool[i].required].pos;
 		}
-		i++;
-	}
-	return (false);
+		else
+		{
+			pool[i].pos = VEC2U(0, 0);
+			if (i-- == 0)
+				return (false);
+			tetri_map_toggle(map, pool[i].tetri->bits, pool[i].pos);
+			++pool[i].pos.x;
+		}
 }
 
 static uint32_t	isqrt(uint32_t num)
@@ -134,7 +122,6 @@ static void			build_pool(t_vector const *tetris, t_tetri_pool *dst)
 		dst[i] = (t_tetri_pool){
 			tetri,
 			(tmp == NULL) ? i : tmp->index,
-			false,
 			{0, 0}
 		};
 		if (tmp == NULL)
@@ -159,7 +146,7 @@ t_tetri_solution	*tetri_solve(t_vector const *tetris)
 	while (true)
 	{
 		map = tetri_map_create(map_size);
-		if (tetri_backtrack(pool, map, tetris->length, 0))
+		if (tetri_backtrack(pool, map, tetris->length))
 			break ;
 		free(map);
 		map_size++;
