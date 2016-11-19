@@ -6,18 +6,18 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 11:26:51 by jaguillo          #+#    #+#             */
-/*   Updated: 2016/11/19 15:59:03 by jaguillo         ###   ########.fr       */
+/*   Updated: 2016/11/19 18:57:39 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internal.h"
 #include "tetri_map.h"
 
-uint64_t		tetri_16to64(uint16_t bits) // TODO: move
+uint64_t		tetri_16to64(uint16_t bits)
 {
-	return (((uint64_t)(bits & (0b1111 <<  0))) <<  0
-		| ((uint64_t)(bits & (0b1111 <<  4))) <<  4
-		| ((uint64_t)(bits & (0b1111 <<  8))) <<  8
+	return (((uint64_t)(bits & (0b1111 << 0))) << 0
+		| ((uint64_t)(bits & (0b1111 << 4))) << 4
+		| ((uint64_t)(bits & (0b1111 << 8))) << 8
 		| ((uint64_t)(bits & (0b1111 << 12))) << 12);
 }
 

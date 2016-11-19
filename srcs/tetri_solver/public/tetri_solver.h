@@ -6,7 +6,7 @@
 /*   By: ccompera <ccompera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 22:26:11 by ccompera          #+#    #+#             */
-/*   Updated: 2016/11/19 16:06:54 by jaguillo         ###   ########.fr       */
+/*   Updated: 2016/11/19 19:23:48 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ typedef struct s_tetri_solution		t_tetri_solution;
 ** ========================================================================== **
 */
 
-struct		s_tetri_pos
+struct				s_tetri_pos
 {
-	uint16_t		tetri;
-	t_vec2u			pos;
+	uint16_t			tetri;
+	t_vec2u				pos;
 };
 
-struct		s_tetri_solution
+struct				s_tetri_solution
 {
-	uint32_t		map_size;
-	uint32_t		count;
-	t_tetri_pos		tetris[0];
+	uint32_t			map_size;
+	uint32_t			count;
+	t_tetri_pos			tetris[0];
 };
 
 /*

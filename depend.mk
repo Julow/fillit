@@ -56,7 +56,8 @@ O_FILES += $(O_DIR)/srcs/main/main.o $(O_DIR)/libft/ft_base/ft_abs.o \
 	$(O_DIR)/libft/ft_vector/ft_vreserve.o $(O_DIR)/libft/ft_vector/ft_vspan.o \
 	$(O_DIR)/srcs/tetri_map/access.o $(O_DIR)/srcs/tetri_map/create.o \
 	$(O_DIR)/srcs/tetri_map/update.o $(O_DIR)/srcs/tetri_parser/check.o \
-	$(O_DIR)/srcs/tetri_parser/parser.o $(O_DIR)/srcs/tetri_solver/solve.o
+	$(O_DIR)/srcs/tetri_parser/parser.o $(O_DIR)/srcs/tetri_solver/backtrack.o \
+	$(O_DIR)/srcs/tetri_solver/build_pool.o $(O_DIR)/srcs/tetri_solver/solve.o
 PUBLIC_LINKS += $(O_DIR)/_public/ft/file.h $(O_DIR)/_public/ft/file_in.h \
 	$(O_DIR)/_public/ft/ft_colors.h $(O_DIR)/_public/ft/ft_dstr.h \
 	$(O_DIR)/_public/ft/ft_in.h $(O_DIR)/_public/ft/ft_out.h \
@@ -378,11 +379,20 @@ $(O_DIR)/srcs/tetri_parser/check.o $(O_DIR)/srcs/tetri_parser/parser.o: \
 	INCLUDE_FLAGS += -Isrcs/tetri_parser
 
 # module tetri_solver
+$(O_DIR)/srcs/tetri_solver/backtrack.o: srcs/tetri_solver/backtrack.c \
+	libft/ft_base/public/libft.h libft/ft_set/public/set.h \
+	libft/ft_vector/public/ft_vector.h srcs/tetri_map/public/tetri_map.h \
+	srcs/tetri_solver/internal.h srcs/tetri_solver/public/tetri_solver.h
+$(O_DIR)/srcs/tetri_solver/build_pool.o: srcs/tetri_solver/build_pool.c \
+	libft/ft_base/public/libft.h libft/ft_set/public/set.h \
+	libft/ft_vector/public/ft_vector.h srcs/tetri_map/public/tetri_map.h \
+	srcs/tetri_solver/internal.h srcs/tetri_solver/public/tetri_solver.h
 $(O_DIR)/srcs/tetri_solver/solve.o: srcs/tetri_solver/solve.c \
 	libft/ft_base/public/libft.h libft/ft_set/public/set.h \
 	libft/ft_vector/public/ft_vector.h srcs/tetri_map/public/tetri_map.h \
 	srcs/tetri_solver/internal.h srcs/tetri_solver/public/tetri_solver.h
 
+$(O_DIR)/srcs/tetri_solver/backtrack.o $(O_DIR)/srcs/tetri_solver/build_pool.o \
 $(O_DIR)/srcs/tetri_solver/solve.o: INCLUDE_FLAGS += -Isrcs/tetri_solver
 
 fillit: $(O_FILES)

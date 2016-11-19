@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 20:03:06 by jaguillo          #+#    #+#             */
-/*   Updated: 2016/11/19 16:07:30 by jaguillo         ###   ########.fr       */
+/*   Updated: 2016/11/19 19:07:02 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,66 +20,30 @@
 
 #include <stdlib.h>
 
-static char const	g_colors[][5] = {
-	"\033[36m",
-	"\033[94m",
-	"\033[93m",
-	"\033[92m",
-	"\033[91m",
-	"\033[90m",
-	"\033[37m",
-	"\033[35m",
-	"\033[31m",
-	"\033[34m",
-	"\033[96m",
-	"\033[95m",
-	"\033[33m",
-	"\033[32m",
-	"\033[97m",
-};
-
 static void		print_solution(t_tetri_solution const *sol)
 {
-	char				tab[sol->map_size][sol->map_size][6];
+	char				tab[sol->map_size][sol->map_size];
 	t_tetri_pos const	*t;
 	uint32_t			i;
 	uint32_t			j;
 
-	i = 0;
-	while (i < sol->map_size)
-	{
-		j = 0;
-		while (j < sol->map_size)
-		{
-			ft_memcpy(tab[i][j], "\033[39m.", 6);
-			j++;
-		}
-		i++;
-	}
-
+	ft_memset(tab, '.', sizeof(tab));
 	i = 0;
 	while (i < sol->count)
 	{
 		t = &sol->tetris[i];
-
 		j = 0;
 		while (j < 16)
 		{
-			char *dst = tab[t->pos.y + j/4][t->pos.x + j%4];
 			if (t->tetri & (1 << j))
-			{
-				ft_memcpy(dst, g_colors[i % ARRAY_LEN(g_colors)], 5);
-				dst[5] = 'A' + i;
-			}
+				tab[t->pos.y + (j >> 2)][t->pos.x + (j & 0b11)] = 'A' + i;
 			j++;
 		}
-
 		i++;
 	}
-
 	i = 0;
 	while (i < sol->map_size)
-		ft_printf("%.*s\033[39m\n", sol->map_size * 6, tab[i++]);
+		ft_printf("%.*s\n", sol->map_size, tab[i++]);
 	ft_printf("%!");
 }
 
@@ -107,7 +71,6 @@ int				main(int argc, char **argv)
 	solution = tetri_solve(&tetris);
 	print_solution(solution);
 	free(solution);
-
 	ft_vclear(&tetris);
 	ft_in_close(in);
 	return (0);

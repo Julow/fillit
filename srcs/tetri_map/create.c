@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 19:01:54 by jaguillo          #+#    #+#             */
-/*   Updated: 2016/11/18 20:06:46 by ccompera         ###   ########.fr       */
+/*   Updated: 2016/11/19 18:57:19 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_tetri_map		*tetri_map_create(uint32_t size)
 	map->side_blocks = side_blocks;
 	ft_bzero(&map->map, total_size);
 	i = 0;
-	while (i < (side_blocks-1))
+	while (i < (side_blocks - 1))
 	{
 		tetri_map_toggle(map, 0b0001000100010001,
 			VEC2U((side_blocks - 2) * 4 + side_mod, i * 4));

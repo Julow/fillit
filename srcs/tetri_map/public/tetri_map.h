@@ -6,7 +6,7 @@
 /*   By: ccompera <ccompera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 13:54:14 by ccompera          #+#    #+#             */
-/*   Updated: 2016/11/19 15:58:58 by jaguillo         ###   ########.fr       */
+/*   Updated: 2016/11/19 19:17:16 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_tetri_map	t_tetri_map;
 ** -
 ** Store bits in a square of 'side_size'
 ** Is composed of 8*8 blocks overlapping each other with a step of 4
-** Example: A stores its neighbors like this: 
+** Example: A stores its neighbors like this:
 ** 		A B
 ** 		C D
 */
@@ -35,14 +35,14 @@ typedef struct s_tetri_map	t_tetri_map;
 ** -
 ** TETRI_MAP_BLOCK(MAP+, X, Y)	Return the block at X, Y
 */
-struct	s_tetri_map
+struct			s_tetri_map
 {
 	uint32_t		side_size;
 	uint32_t		side_blocks;
 	uint64_t		map[0];
 };
 
-# define TETRI_MAP_BLOCK(M, X, Y)		((M)->map[(Y) * (M)->side_blocks + (X)])
+# define TETRI_MAP_BLOCK(M, X, Y)	((M)->map[(Y) * (M)->side_blocks + (X)])
 
 /*
 ** Create a square tetri_map with side 'size'
