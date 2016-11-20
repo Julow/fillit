@@ -2,12 +2,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    lol.sh                                             :+:      :+:    :+:    #
+#    test.sh                                            :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: ccompera <ccompera@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/16 16:01:06 by ccompera          #+#    #+#              #
-#    Updated: 2016/11/19 18:30:36 by jaguillo         ###   ########.fr        #
+#    Updated: 2016/11/20 16:12:19 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -132,11 +132,13 @@ A_DIR="$BASE_DIR/a"
 B_DIR="$BASE_DIR/b"
 INPUT_DIR="$BASE_DIR/inputs"
 
+MAP_SIZE="12"
+
 mkdir -p "$A_DIR" "$B_DIR" "$INPUT_DIR"
 
-gen_maps 17 999 "$INPUT_DIR"
+gen_maps "$MAP_SIZE" 15 "$INPUT_DIR"
 
-MAPS=$INPUT_DIR/17_*
+MAPS=$INPUT_DIR/${MAP_SIZE}_*
 
 test_maps "$A_DIR" "$A_FILLIT" $MAPS
 
@@ -149,5 +151,8 @@ then
 	then
 		test_maps "$B_DIR" "$B_FILLIT" $MAPS
 	fi
-	diff_maps "$A_DIR" "$B_DIR"
+	if diff_maps "$A_DIR" "$B_DIR"
+	then
+		echo "Diff OK"
+	fi
 fi

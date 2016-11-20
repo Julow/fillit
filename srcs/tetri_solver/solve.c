@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 19:45:58 by jaguillo          #+#    #+#             */
-/*   Updated: 2016/11/19 19:25:05 by jaguillo         ###   ########.fr       */
+/*   Updated: 2016/11/20 14:06:25 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static t_tetri_solution	*build_solution(t_tetri_pool const *pool,
 
 static uint32_t			isqrt(uint32_t num)
 {
-	uint32_t	r;
+	uint32_t				r;
 
 	r = num / 2;
 	if (num == 0)
@@ -49,14 +49,29 @@ static uint32_t			isqrt(uint32_t num)
 	return (r + 1);
 }
 
+static uint32_t			initial_map_size(t_tetri_pool const *pool, uint32_t len)
+{
+	uint32_t				i;
+	uint32_t				map_size;
+
+	map_size = isqrt(len * 4);
+	i = 0;
+	while (i < len)
+	{
+		map_size = MAX(MAX(map_size, pool[i].clip.x), pool[i].clip.y);
+		i++;
+	}
+	return (map_size);
+}
+
 t_tetri_solution		*tetri_solve(t_vector const *tetris)
 {
-	t_tetri_pool		pool[tetris->length];
-	t_tetri_map			*map;
-	uint32_t			map_size;
+	t_tetri_pool			pool[tetris->length];
+	t_tetri_map				*map;
+	uint32_t				map_size;
 
 	build_pool(tetris, pool);
-	map_size = isqrt(tetris->length * 4);
+	map_size = initial_map_size(pool, tetris->length);
 	while (true)
 	{
 		map = tetri_map_create(map_size);
